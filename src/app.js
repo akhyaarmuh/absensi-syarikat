@@ -1,10 +1,12 @@
+import ip from 'ip';
+import open from 'open';
 import path from 'path';
 import cors from 'cors';
 import express from 'express';
 import cookieParser from 'cookie-parser';
 import { PrismaClient } from '@prisma/client';
 
-import { PORT, API_VERSION } from './secret.js';
+import { PORT, API_VERSION, NODE_ENV } from './secret.js';
 import { __dirname } from './utilities/index.js';
 import errorHandler from './middlewares/error-handler.js';
 
@@ -34,4 +36,10 @@ app.use(errorHandler);
 
 app.listen(port, () => {
   console.log(`[server]: Server is running at http://localhost:${port}`);
+});
+
+app.listen(port, ip.address(), () => {
+  console.log(`Server running on: http://${ip.address()}:${port}`);
+  if (!NODE_ENV) open(`http://localhost:${port}`, { app: 'chrome' });
+  console.log('App started');
 });
