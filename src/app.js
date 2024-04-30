@@ -6,13 +6,15 @@ import express from 'express';
 import cookieParser from 'cookie-parser';
 import { PrismaClient } from '@prisma/client';
 
-import { PORT, API_VERSION, NODE_ENV } from './secret.js';
 import { __dirname } from './utilities/index.js';
+import { PORT, API_VERSION, NODE_ENV } from './secret.js';
 import errorHandler from './middlewares/error-handler.js';
+import backupDatabase from './utilities/backup-database.js';
 
 import rootRouter from './routes/index.js';
 
 export const prismaClient = new PrismaClient();
+await backupDatabase();
 
 const app = express();
 
