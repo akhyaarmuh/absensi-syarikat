@@ -7,9 +7,7 @@ export default async (req, res, next) => {
   if (NODE_ENV === 'development') {
     req.user = {
       id: 1,
-      full_name: 'Muhammad Akhyar',
       role: 'admin',
-      shop_id: null,
     };
     return next();
   }
@@ -25,9 +23,7 @@ export default async (req, res, next) => {
 
       req.user = {
         id: decoded.id,
-        full_name: decoded.full_name,
         role: decoded.role,
-        shop_id: decoded.shop_id,
       };
 
       next();

@@ -1,4 +1,27 @@
-node_modules
 # Keep environment variables out of version control
+/node_modules
+/public/images/*
+!/public/images/.gitkeep
 .env
 backup-data.json
+
+# # REACTJS .gitignore
+# dependencies
+/client/node_modules
+/client/.pnp
+/client/.pnp.js
+
+# testing
+/client/coverage
+
+# production
+# /client/build
+
+# misc
+/client/.DS_Store
+/client/.env.local
+/client/.env.test.local
+
+/client/npm-debug.log*
+/client/yarn-debug.log*
+/client/yarn-error.log*

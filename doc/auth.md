@@ -61,10 +61,13 @@ refresh-token = [refresh-token]
 
 ```json
 {
-  "data": {
+  "data": "[refres-token]",
+  "payload": {
+    //isi dari payload example
     "id": 1,
-    "full_name": "Akhyaar Muhammad",
-    "role": "admin"
+    "full_name": "Muhammad Akhyar",
+    "role": "admin",
+    "status": 1
   }
 }
 ```
@@ -95,7 +98,14 @@ Response Body (Success) :
 
 ```json
 {
-  "data": "[access-token]"
+  "data": "[access-token]",
+  "payload": {
+    //isi dari payload example
+    "id": 1,
+    "full_name": "Muhammad Akhyar",
+    "role": "admin",
+    "status": 1
+  }
 }
 ```
 

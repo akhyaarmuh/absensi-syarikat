@@ -41,7 +41,6 @@ app.listen(port, () => {
 });
 
 app.listen(port, ip.address(), () => {
-  console.log(`Server running on: http://${ip.address()}:${port}`);
+  console.log(`[server]: Server is running at: http://${ip.address()}:${port}`);
   if (!NODE_ENV) open(`http://localhost:${port}`, { app: 'chrome' });
-  console.log('App started');
 });

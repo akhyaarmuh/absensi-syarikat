@@ -23,13 +23,6 @@ router.post(
 );
 router.get('/', verifyRefreshToken, verifyRoles(['admin']), getAllUser);
 router.get('/:id', verifyRefreshToken, getUserById);
-// router.patch(
-//   '/:id',
-//   verifyAccesToken,
-//   verifyRoles(['admin']),
-//   validator('createRegion'),
-//   updateRegionById
-// );
 router.patch('/:id', verifyAccesToken, validator('updateUser'), updateUserById);
 router.delete('/:id', verifyAccesToken, verifyRoles(['admin']), deleteUserById);
 

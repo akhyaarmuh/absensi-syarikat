@@ -61,6 +61,7 @@ export const signIn = async (req, res, next) => {
       id: user.id,
       full_name: user.full_name,
       role: user.role,
+      status: user.status,
     };
 
     const refresh_token = jwt.sign(payload, REFRESH_TOKEN, {
@@ -79,10 +80,10 @@ export const signIn = async (req, res, next) => {
     res
       .cookie('refresh-token', refresh_token, {
         httpOnly: true,
-        maxAge: 3 * 24 * 60 * 60 * 1000,
+        maxAge: 1 * 24 * 60 * 60 * 1000,
       })
       .status(200)
-      .json({ data: payload });
+      .json({ data: refresh_token });
   } catch (error) {
     next(error);
   }
@@ -91,7 +92,8 @@ export const signIn = async (req, res, next) => {
 export const refreshToken = async (req, res, next) => {
   const { user } = req;
 
-  if (!user.status) throw new ErrorResponse(`Akun anda terblokir`, 403);
+  if (!user.status) return res.redirect(403, '/login?error_message=akun anda terblokir');
+  // throw new ErrorResponse(`Akun anda terblokir`, 403);
 
   try {
     const accessToken = jwt.sign(
@@ -99,6 +101,7 @@ export const refreshToken = async (req, res, next) => {
         id: user.id,
         full_name: user.full_name,
         role: user.role,
+        status: user.status,
       },
       ACCESS_TOKEN,
       {
