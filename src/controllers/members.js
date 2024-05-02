@@ -37,17 +37,16 @@ export const getAllMember = async (req, res, next) => {
     region,
     ...query
   } = req.query;
+  const page = Number(query.page || 1);
+  const limit = Number(query.limit || 20);
+  const orderBy = fullName ? { full_name: 'asc' } : { created_at: 'desc' };
 
-  const orderBy = fullName ? { name: 'asc' } : { created_at: 'desc' };
   const where = {};
 
   if (noInduk) where.no_induk = noInduk;
   if (fullName) where.full_name = { contains: fullName };
   if (status) where.status = status;
   if (region) where.region_id = Number(region);
-
-  const page = Number(query.page || 1);
-  const limit = Number(query.limit || 20);
 
   try {
     const rows = await prismaClient.members.count({ where });

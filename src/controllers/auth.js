@@ -92,8 +92,7 @@ export const signIn = async (req, res, next) => {
 export const refreshToken = async (req, res, next) => {
   const { user } = req;
 
-  if (!user.status) return res.redirect(403, '/login?error_message=akun anda terblokir');
-  // throw new ErrorResponse(`Akun anda terblokir`, 403);
+  if (!user.status) throw new ErrorResponse(`Akun anda terblokir`, 403);
 
   try {
     const accessToken = jwt.sign(
