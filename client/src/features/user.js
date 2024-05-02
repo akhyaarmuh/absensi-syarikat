@@ -10,6 +10,7 @@ export const userSlice = createSlice({
       state.id = action.payload.id;
       state.full_name = action.payload.full_name;
       state.role = action.payload.role;
+      state.status = action.payload.status;
       state.exp = action.payload.exp;
     },
 
@@ -21,6 +22,7 @@ export const userSlice = createSlice({
       state.id = '';
       state.full_name = '';
       state.role = '';
+      state.status = 0;
       state.exp = 0;
     },
   },

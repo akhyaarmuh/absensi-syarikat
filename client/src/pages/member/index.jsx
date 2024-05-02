@@ -24,8 +24,8 @@ const Member = () => {
     pages: 0,
   });
   const [queries, setQueries] = useState({
-    'no-induk': params.get('no_induk') || '',
-    'full-name': params.get('full_name') || '',
+    'no-induk': params.get('no-induk') || '',
+    'full-name': params.get('full-name') || '',
     status: params.get('status') || '',
     region: params.get('region') || '',
     page: params.get('page') || 1,
