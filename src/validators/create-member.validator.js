@@ -58,5 +58,5 @@ export default Joi.object().keys({
   region_id: Joi.number().required().messages({
     'any.required': 'Wilayah anggota wajib diisi',
   }),
-  status: Joi.string().valid('new', 'active', 'not active', 'repeat'),
+  status: Joi.string().valid('new', 'active', 'inactive', 'repeat'),
 });

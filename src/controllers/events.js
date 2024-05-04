@@ -98,7 +98,7 @@ export const createAttendanceByIdEvent = async (req, res, next) => {
     // jika anggota dengan no. induk tidak ada
     if (!member) throw new ErrorResponse(`Anggota tidak ditemukan`, 404);
 
-    if (member.status == 'not active')
+    if (member.status == 'inactive')
       throw new ErrorResponse('Keanggotaan anda terblokir', 400);
 
     if (member.status == 'active') await attendanceCheck(type, member.id, created_at);
