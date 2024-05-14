@@ -36,7 +36,7 @@ CREATE TABLE `members` (
   `father_name` VARCHAR(75)                                   NOT NULL,
   `address`     VARCHAR(125)                                  NOT NULL,
   `region_id`   INT                                           NOT NULL,
-  `status`      ENUM('new', 'active', 'inactive', 'repeat') NOT NULL DEFAULT 'new',
+  `status`      ENUM('new', 'active', 'inactive', 'repeat')   NOT NULL DEFAULT 'new',
   `image`       VARCHAR(750),
   `created_at`  TIMESTAMP                                     NOT NULL  DEFAULT CURRENT_TIMESTAMP,
   `updated_at`  TIMESTAMP                                     NOT NULL  DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
