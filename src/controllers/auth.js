@@ -3,7 +3,7 @@ import jwt from 'jsonwebtoken';
 
 import { prismaClient } from '../app.js';
 import ErrorResponse from '../utilities/error-response.js';
-import { REFRESH_TOKEN, ACCESS_TOKEN } from '../secret.js';
+import { REFRESH_TOKEN, ACCESS_TOKEN, LOCATION } from '../secret.js';
 
 export const signUp = async (req, res, next) => {
   const body = req.body;
@@ -113,7 +113,7 @@ export const refreshToken = async (req, res, next) => {
   }
 };
 
-export const signOut = async (req, res) => {
+export const signOut = async (req, res, next) => {
   const { id } = req.user;
 
   try {
@@ -130,27 +130,29 @@ export const signOut = async (req, res) => {
   }
 };
 
-export const resetPassword = async (req, res) => {
+export const resetPassword = async (req, res, next) => {
   const { email } = req.body;
 
   try {
-    if (email === 'akhyaarmuh@gmail.com') {
-      const admin = await prismaClient.users.findFirst({
-        where: { role: 'admin' },
-      });
-
-      if (admin) {
-        await prismaClient.users.update({
-          data: { email: 'admin@gmail.com', password: bcrypt.hashSync('Admin123', 10) },
-          where: { id: admin.id },
+    if (LOCATION === 'local') {
+      if (email === 'akhyaarmuh@gmail.com') {
+        const owner = await prismaClient.users.findFirst({
+          where: { role: 'owner' },
         });
 
-        return res.sendStatus(200);
-      }
-    }
+        if (owner) {
+          await prismaClient.users.update({
+            data: { email: 'admin@gmail.com', password: bcrypt.hashSync('Admin123', 10) },
+            where: { id: owner.id },
+          });
 
-    res.sendStatus(400);
+          return res.sendStatus(200);
+        }
+      }
+
+      res.sendStatus(400);
+    }
   } catch (error) {
-    res.status(500).json({ message: error.message || 'Server error', error });
+    next(error);
   }
 };
